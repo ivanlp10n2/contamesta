@@ -27,6 +27,8 @@ object Dependencies {
     val organizeImports  = "0.5.0"
     val semanticDB       = "4.4.28"
 
+    val tofu = "0.10.6"
+
     val weaver = "0.7.6"
   }
 
@@ -41,6 +43,8 @@ object Dependencies {
     val catsRetry  = "com.github.cb372" %% "cats-retry"  % V.catsRetry
     val squants    = "org.typelevel"    %% "squants"     % V.squants
     val fs2        = "co.fs2"           %% "fs2-core"    % V.fs2
+
+    val tofu       = "tf.tofu"          %% "tofu-core-ce3" % V.tofu
 
     val circeCore    = circe("core")
     val circeGeneric = circe("generic")

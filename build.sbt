@@ -20,7 +20,7 @@ lazy val root = (project in file("."))
 lazy val tests = (project in file("modules/tests"))
   .configs(IntegrationTest)
   .settings(
-    name := "shopping-cart-test-suite",
+    name := "contamesta-test-suite",
     scalacOptions ++= List("-Ymacro-annotations", "-Yrangepos", "-Wconf:cat=unused:info"),
     testFrameworks += new TestFramework("weaver.framework.CatsEffect"),
     Defaults.itSettings,
@@ -44,8 +44,8 @@ lazy val core = (project in file("modules/core"))
   .enablePlugins(DockerPlugin)
   .enablePlugins(AshScriptPlugin)
   .settings(
-    name := "shopping-cart-core",
-    Docker / packageName := "shopping-cart",
+    name := "contamesta-core",
+    Docker / packageName := "contamesta",
     scalacOptions ++= List("-Ymacro-annotations", "-Yrangepos", "-Wconf:cat=unused:info"),
     scalafmtOnCompile := true,
     resolvers += Resolver.sonatypeRepo("snapshots"),
@@ -89,7 +89,8 @@ lazy val core = (project in file("modules/core"))
       Libraries.refinedCats,
       Libraries.skunkCore,
       Libraries.skunkCirce,
-      Libraries.squants
+      Libraries.squants,
+      Libraries.tofu
     )
   )
 
