@@ -1,4 +1,5 @@
 /target/
 project/target/*
+modules/core/target
 modules/target
 test/target
