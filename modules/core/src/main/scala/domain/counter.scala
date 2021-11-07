@@ -31,7 +31,9 @@ object Service {
 
 object Program extends IOApp {
   override def run(args: List[String]): IO[ExitCode] = {
-    IO.ref(1).flatMap(ref => {
+    val initial = 0
+
+    IO.ref(initial).flatMap(ref => {
       implicit val c = CounterRef.make[IO](ref)
       val service = new SimplerApi[IO]()
       for{
@@ -51,10 +53,10 @@ object Interpreters {
     def make[F[_]: LiftIO](state: Ref[IO, Int]): Counter[F] =
       new Counter[F] {
         override def add(n: Int): F[Int] =
-          state.updateAndGet(_ + 1).to[F]
+          state.updateAndGet(_ + n).to[F]
 
         override def sub(n: Int): F[Int] =
-          state.updateAndGet(_ - 1).to[F]
+          state.updateAndGet(_ - n).to[F]
 
         override def set(n: Int): F[Int] =
           state.getAndSet(n).to[F]
