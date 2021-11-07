@@ -6,6 +6,7 @@ object Dependencies {
     val cats          = "2.6.1"
     val catsEffect    = "3.2.9"
     val catsRetry     = "3.1.0"
+    val catsMtl      = "1.2.0"
     val circe         = "0.14.1"
     val ciris         = "2.1.1"
     val derevo        = "0.12.6"
@@ -41,6 +42,7 @@ object Dependencies {
     val cats       = "org.typelevel"    %% "cats-core"   % V.cats
     val catsEffect = "org.typelevel"    %% "cats-effect" % V.catsEffect
     val catsRetry  = "com.github.cb372" %% "cats-retry"  % V.catsRetry
+    val catsMtl    = "org.typelevel"    %% "cats-mtl"    % V.catsMtl
     val squants    = "org.typelevel"    %% "squants"     % V.squants
     val fs2        = "co.fs2"           %% "fs2-core"    % V.fs2
 

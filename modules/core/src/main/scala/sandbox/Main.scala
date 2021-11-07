@@ -1,47 +1,25 @@
 package sandbox
 
-object Main extends App {
+import cats.effect._
+import cats.syntax.all._
+import scala.concurrent.duration._
 
-  sealed trait ErrorApp extends Throwable
-  case class ParseError() extends Throwable
-  case class ArithmeticError() extends Throwable
+object Main extends IOApp {
 
-  trait RaiseError[F[_], E] {
-    def raise[A](e: E): F[A]
-  }
-  import cats._
-  import tofu.syntax.raise._
-  import cats.syntax.all._
-  import tofu._
-  def divide[F[_]](x: String, y: String)(
-      implicit parseError: RaiseError[F, ParseError],
-      arithmeticError: RaiseError[F, ArithmeticError]
-  ): F[Int] = ???
-//    (x.toIntOption.orRaise(ParseError()),
-//      y.toIntOption.orRaise[F])
-//      .mapN(_ / _)
+  import debug._
 
-  def a : String => Either[String, Int] = ???
-  def b : Int => Either[String, Unit] = ???
-
-  type ID = String
-  final case class AbstractEvent(
-    id : ID,
-    name : String,
-    typeEvent: EventType
-  )
-  sealed trait EventType
-
-
-  final case class PurchaseEvent( details: String ) extends EventType
-  final case class RefundEvent( orderId: String ) extends EventType
-
-  def makeCopy(e: AbstractEvent, name: String): AbstractEvent = {
-    e.copy(name = name)
+  override def run(args: List[String]): IO[ExitCode] = {
+    (clock, ohNo).parTupled
+      .attempt.as(ExitCode.Error)
   }
 
+  val ohNo: IO[Unit] = IO.sleep(2.seconds) *> IO.raiseError(new Exception)
+  cats.effect.std.Semaphore
 
-
-
-  //  println("Hello " |+| "Cats!")
+  val clock: IO[Unit] = for {
+    _ <- IO.sleep(1.seconds)
+    _ <- IO(println(s"Time is ${System.currentTimeMillis()}")).debug
+    _ <- clock
+  } yield ()
 }
+
