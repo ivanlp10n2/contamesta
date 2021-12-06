@@ -6,5 +6,7 @@ modules/target
 test/target
 .idea/*
 project/project/target
+.metals
+
 
 
