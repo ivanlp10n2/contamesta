@@ -1,9 +1,0 @@
-/target/
-project/target/*
-modules/core/target
-modules/tests/target
-modules/target
-test/target
-.idea/*
-
-
